@@ -1,4 +1,21 @@
 #
+# Prompt
+#
+
+setopt PROMPT_SUBST
+
+format_current_git_branch() {
+  local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [[ -n ${BRANCH} ]] ; then
+    echo "(${BRANCH})"
+  fi
+}
+
+export NEWLINE=$'\n'
+
+export PS1='%n@%m %F{cyan}%~%F{reset_color} %F{yellow}$(format_current_git_branch)%F{reset_color} ${NEWLINE}%# '
+
+#
 # Les alias
 #
 
